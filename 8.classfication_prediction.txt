@@ -1,0 +1,57 @@
+import matplotlib.pyplot as plt
+# Function to check loan eligibility
+def loan_eligibility(income, credit_score, loan_amount, is_employed):
+    # Check employment status
+    if not is_employed:
+        return "Not eligible for the loan: Employment status is required."
+    # Check income criteria
+    if income < 50000:
+        return "Not eligible for the loan: Income must be greater than $50,000."
+    # Check credit score criteria
+    if credit_score < 650:
+        return "Not eligible for the loan: Credit score must be greater than 650."
+    # Check loan amount criteria
+    max_loan = 0.4 * income  # Loan amount cannot exceed 40% of the annual income
+    if loan_amount > max_loan:
+        return f"Not eligible for the loan: Loan amount must not exceed 40% of your income (${max_loan:.2f})."
+     # If all conditions are met
+    return "Congratulations! You are eligible for the loan."
+# Function to plot results
+def plot_loan_eligibility(income, credit_score, loan_amount, eligibility_result):
+    max_loan = 0.4 * income
+# Plot 1: Income vs Loan Amount
+    fig, ax = plt.subplots(1, 3, figsize=(18, 5))
+   ax[0].bar(['Your Income', 'Requested Loan'], [income, loan_amount], color=['blue', 'orange'])
+    ax[0].axhline(y=max_loan, color='green', linestyle='--', label=f'Max Loan (40% of Income): ${max_loan:.2f}')
+    ax[0].set_title("Income vs Loan Amount")
+    ax[0].set_ylabel("Amount ($)")
+    ax[0].legend()
+# Plot 2: Credit Score Comparison
+    ax[1].bar(['Your Credit Score', 'Required Credit Score'], [credit_score, 650], color=['blue', 'red'])
+    ax[1].set_title("Credit Score Comparison")
+    ax[1].set_ylabel("Credit Score")
+
+    # Plot 3: Loan Eligibility Result
+    if "eligible" in eligibility_result.lower():
+        labels = ['Eligible', 'Ineligible']
+        sizes = [1, 0]
+    else:
+        labels = ['Eligible', 'Ineligible']
+        sizes = [0, 1]
+        
+    ax[2].pie(sizes, labels=labels, autopct='%1.1f%%', colors=['green', 'red'])
+    ax[2].set_title("Loan Eligibility Result")
+
+    plt.tight_layout()
+    plt.show()
+# Example Usage
+income = float(input("Enter your annual income: "))
+credit_score = int(input("Enter your credit score: "))
+loan_amount = float(input("Enter the loan amount you're requesting: "))
+is_employed = input("Are you employed? (yes/no): ").strip().lower() == 'yes'
+# Check eligibility
+eligibility_result = loan_eligibility(income, credit_score, loan_amount, is_employed)
+print(eligibility_result)
+
+# Plot the results
+plot_loan_eligibility(income, credit_score, loan_amount, eligibility_result)

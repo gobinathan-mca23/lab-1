@@ -1,0 +1,15 @@
+import numpy as np
+
+def create_crisp_relation(size):
+    return np.random.randint(2, size=(size, size))
+
+def create_fuzzy_relation(size):
+    return np.random.rand(size, size)	
+
+def display_relation(matrix, relation_type):
+    print(f"{relation_type} Relation Matrix:\n{matrix}\n")
+
+if __name__ == "__main__":
+    size = 4
+    display_relation(create_crisp_relation(size), "Crisp")
+    display_relation(create_fuzzy_relation(size), "Fuzzy")

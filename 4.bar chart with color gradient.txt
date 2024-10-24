@@ -1,0 +1,13 @@
+import matplotlib.pyplot as plt
+import numpy as np
+categories=['Category A','Category B','Category C','Category D']
+values=[10,30,50,20]
+bars=plt.bar(categories,values,
+             color=plt.cm.viridis(np.linspace(0,1,len(categories))))
+cbar=plt.colorbar(plt.cm.ScalarMappable(cmap=plt.cm.viridis),
+                  ax=plt.gca())
+cbar.set_label('Color Gradient')
+plt.xlabel('Categories')
+plt.ylabel('Value')
+plt.title('Bar Chart with Color Gradient')	
+plt.show()                                                                                                       

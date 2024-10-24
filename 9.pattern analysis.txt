@@ -1,0 +1,40 @@
+from collections import defaultdict, Counter
+import numpy as np
+
+def find_patterns(data, pattern_length):
+    patterns = defaultdict(list)
+    for index, string in enumerate(data):
+       for i in range(len(string) - pattern_length + 1):
+            pattern = string[i:i + pattern_length]
+            patterns[pattern].append(index)
+    return patterns
+
+def find_frequencies(patterns):
+    frequency = {pattern: len(positions) for pattern, positions in patterns.items()}
+    return frequency
+
+def find_outliers(frequency, threshold=1):
+    outliers = {pattern: freq for pattern, freq in frequency.items() if freq <= threshold}
+    return outliers
+
+def main():
+    # Sample data: list of strings
+    data = ["abcabc",
+            "bcabcd",
+            "abcdab",]
+    pattern_length = 3
+    threshold = 2  
+    patterns = find_patterns(data, pattern_length)
+    frequency = find_frequencies(patterns)
+    outliers = find_outliers(frequency, threshold)
+    print("Patterns and their positions:")
+    for pattern, positions in patterns.items():
+        print(f"Pattern: '{pattern}' -> Positions: {positions}")
+    print("\nFrequency of each pattern:")
+    for pattern, freq in frequency.items():
+        print(f"Pattern: '{pattern}' -> Frequency: {freq}")
+    print("\nOutliers:")
+    for pattern, freq in outliers.items():
+        print(f"Pattern: '{pattern}' -> Frequency: {freq}")
+if __name__ == "__main__":
+    main()

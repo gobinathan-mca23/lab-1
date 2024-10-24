@@ -1,0 +1,41 @@
+<html>
+<head>
+<style>
+form {  
+  border-color: green;
+  color: blue;
+  font-family: verdana;
+  font-size: 200%;
+}
+</style>
+</head>
+<Marquee><h2> Applying heuristics in user interface during data validation</h2></marquee><br><br>
+<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+<center>LOGIN FORM</center><br></br>
+<center>User Name: <input type="text" name="fname"><br><br>
+Password: <input type = "password" name="pwd"><br><br><br>
+<button style="background-color:green; border-color:red; color:white">SUBMIT</button></center>
+</form>
+<script>
+function validateForm() 
+{
+  let x = document.forms["myForm"]["fname"].value;
+  let y = document.forms["myForm"]["pwd"].value;
+  if (x == "") 
+  {
+    alert("Name must be filled out");
+    return false;
+  }
+  if (y== "PSG")
+  {
+    alert("Your form is submitted successfully");
+    return false;
+  }
+  else
+  {
+    alert ("A valid password required");
+    return false;
+  }
+}
+</script>
+</html>
